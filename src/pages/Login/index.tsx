@@ -1,16 +1,23 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/Auth/AuthContextType";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Teacher1 from "../../assets/logo.png"
+import './Login.css';
 
 export const Login = () => {
     const auth = useContext(AuthContext);
     const navegate = useNavigate();
+    const [formValues, setformValues] = useState({email: '', senha:''});
+    
+    const handleInputChange = (e: any) => {
+        const {name, value} = e.target
+        setformValues({...formValues, [name]: value});
+    } 
 
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-    const  logar = async () => {
-        if(email && senha){
-            const isLogged = await auth.singin(email, senha);
+    const  logar = async (e: any) => {
+        e.preventDefault();        
+        if(formValues.email && formValues.senha){
+            const isLogged = await auth.singin(formValues.email, formValues.senha);
             if(isLogged){
                 navegate('./');
             }else{
@@ -18,22 +25,29 @@ export const Login = () => {
             }
         }
     };
+
     return (
-        <div>
-            <h2>Pagina fechada</h2>
-            <input 
-                type="text" 
-                value={email} 
-                onChange={e => setEmail(e.target.value)}
-                placeholder="Digite seu e-mail"
-            />
-            <input 
-                type="text" 
-                value={senha} 
-                onChange={e => setSenha(e.target.value)}
-                placeholder="Digite sua senha" 
-            />
-            <button onClick={logar}>Entrar</button>
+        <div className="Login">
+            <img src={Teacher1 }/>
+            <h2>Login</h2>
+            <form onSubmit={logar}>
+                <input 
+                    type="text" 
+                    name="email" 
+                    value={formValues.email || ''} 
+                    onChange={handleInputChange}
+                    placeholder="Digite seu e-mail"
+                />
+                <input 
+                    type="text"
+                    name="senha" 
+                    value={formValues.senha  || ''} 
+                    onChange={handleInputChange}
+                    placeholder="Digite sua senha" 
+                />
+                <button type="submit">Entrar</button>
+            </form>
+            <p>Não tem conta? <Link to="/cadastrar">Cadastre-se</Link></p>
         </div>
     );
 }

@@ -1,9 +1,6 @@
 .App {
   text-align: center;
-}
-
-nav a {
-  color: #000000;
-  display: inline-block;
-  margin: 0 10px;
+  align-self: center;
+  margin: 0;
+  padding: 0;
 }

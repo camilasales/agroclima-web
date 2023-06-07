@@ -1,0 +1,38 @@
+.Login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
+
+form{
+    min-width: 24vw;
+    max-width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    text-align: center;
+}
+  
+input,
+select,
+textarea,
+.radios,
+.checks{
+    margin-bottom: 20px;
+}
+
+input{
+    width: 100%;
+}
+
+button{
+    width: 100%;
+    background-color: #6ccdc4;
+    margin: 0;
+    margin-left: 10px;
+}
+
+img{
+    height: 250px;
+}

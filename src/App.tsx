@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import './App.css';
 import {Link, Route, Routes, useNavigate} from 'react-router-dom';
 import { Home } from './pages/Home'
-import { Private } from './pages/Private'
+import { Cadastro } from './pages/Cadastro'
 import { RequireAuth } from './contexts/Auth/RequireAuth';
 import { AuthContext } from './contexts/Auth/AuthContextType';
 
@@ -17,18 +17,18 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <h1>Header do site</h1>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/private">Pagina privada</Link>
-          {auth.user && <button  onClick={handleLougout} >Sair</button>}
-        </nav>
-      </header>
-      <hr />
+      { auth.user &&
+        <header>
+          <h1>Header do site</h1>
+          <nav>
+            <Link to="/">Home</Link>
+            <button  onClick={handleLougout} >Sair</button>
+          </nav>
+        </header>
+      }
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/private" element={<RequireAuth><Private/></RequireAuth>}/>
+        <Route path="/cadastrar" element={<Cadastro/>}/>
+        <Route path="/" element={<RequireAuth><Home/></RequireAuth>}/>
       </Routes>
     </div>
   );
