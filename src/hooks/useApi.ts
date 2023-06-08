@@ -17,5 +17,9 @@ export const useApi = () => ({
     logout: async () => {
         const response = await api.post('/logout');
         return response.data;
-    }
+    },
+    cadastrar: async (params: object) => {
+        const response = await api.post('/usuario', params);
+        return response.data;
+    },
 })

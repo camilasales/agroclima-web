@@ -11,7 +11,6 @@ export const AuthProvider = ({children}: {children: JSX.Element}) => {
         const validateUserLogado = async () => {
             const storageData = localStorage.getItem('userLogado');
             if(storageData){
-                console.log(JSON.parse(storageData), storageData);
                 const data = await JSON.parse(storageData);
                 
                 if(data){
@@ -20,7 +19,8 @@ export const AuthProvider = ({children}: {children: JSX.Element}) => {
             }
         }
         validateUserLogado();
-    })
+    });
+
     const singin = async (email: string, senha: string) => {
         const data = await api.singin(email, senha);
         if(data.token){
@@ -29,11 +29,19 @@ export const AuthProvider = ({children}: {children: JSX.Element}) => {
             return true;
         }
         return false;
-    }
+    };
     
     const singout = async () => {
         setUser(null);
         clearUsuarioLogado();
+    };
+
+    const cadastrar = async (params: object) => {
+        const cadastro = await api.cadastrar(params);
+        if(cadastro){
+            return cadastro;
+        }
+        return {};
     }
 
     const setUsuarioLogado = (user: string)  => {
@@ -43,7 +51,7 @@ export const AuthProvider = ({children}: {children: JSX.Element}) => {
         localStorage.removeItem('userLogado');
     }
     return (
-        <AuthContext.Provider value={{user, singin, singout}}>
+        <AuthContext.Provider value={{user, singin, singout, cadastrar}}>
             {children}
         </AuthContext.Provider>
     );

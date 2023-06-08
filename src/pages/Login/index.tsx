@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/Auth/AuthContextType";
 import { Link, useNavigate } from "react-router-dom";
-import Teacher1 from "../../assets/logo.png"
+import logo from "../../assets/logo.png"
 import './Login.css';
 
 export const Login = () => {
@@ -28,7 +28,7 @@ export const Login = () => {
 
     return (
         <div className="Login">
-            <img src={Teacher1 }/>
+            <img src={logo }/>
             <h2>Login</h2>
             <form onSubmit={logar}>
                 <input 
