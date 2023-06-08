@@ -1,16 +1,16 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API
+    baseURL: 'https://agroclima-api.onrender.com'
 });
 
 export const useApi = () => ({
-    validateToken: async (token: string) => {
+    validateToken: async (token) => {
         if(token){
             return true;
         }
     },
-    singin: async (email: string, senha: string) => {
+    singin: async (email, senha) => {
         const response = await api.post('/auth/login', {email, senha});
         return response.data;
     },
@@ -18,7 +18,7 @@ export const useApi = () => ({
         const response = await api.post('/logout');
         return response.data;
     },
-    cadastrar: async (params: object) => {
+    cadastrar: async (params) => {
         const response = await api.post('/usuario', params);
         return response.data;
     },

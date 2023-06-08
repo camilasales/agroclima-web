@@ -19,7 +19,7 @@ export const Login = () => {
         if(formValues.email && formValues.senha){
             const isLogged = await auth.singin(formValues.email, formValues.senha);
             if(isLogged){
-                navegate('./');
+                navegate('./home');
             }else{
                 alert("Usuario nao encontrado");
             }

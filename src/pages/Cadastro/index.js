@@ -15,12 +15,12 @@ export const Cadastro = () => {
         confirmacaoSenha:'',
     });
     
-    const handleInputChange = (e: any) => {
+    const handleInputChange = (e) => {
         const {name, value} = e.target
         setformValues({...formValues, [name]: value});
     } 
 
-    const cadastrar = (e: any) => {
+    const cadastrar = (e) => {
         e.preventDefault();        
         if(formValues){
             auth.cadastrar(formValues).then((data) => {
