@@ -1,41 +1,30 @@
 import { Fragment, useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../contexts/Auth/AuthContextType";
 import axios from "axios";
 
 export const  Home = () => {
-    const [location, setLocation] = useState(false);
+
     const [weather, setWeather] = useState(false);
 
-    let getWeather = async (lat, long) => {
-        let res = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
-            params: {
-                lat: lat,
-                lon: long,
-                appid: process.env.REACT_APP_OPEN_WHEATHER_KEY,
-                lang: 'pt_br',
-                units: 'metric'
-            }
+    let apiWeather  = async (latitude, longitude) => {
+        const headers = {
+            'Authorization': "bearer " + localStorage.getItem("TOKEN")
+        }
+        const api = axios.create({
+            baseURL: 'https://agroclima-api.onrender.com',
+            headers: headers
         })
+        let res = await api.post('/clima-tempo/clima-atual', { latitude, longitude});
         setWeather(res.data)
         console.log(res.data)
     }
+
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            getWeather(position.coords.latitude, position.coords.longitude)
-            setLocation(true)
-            })
+        apiWeather("-46.663537", "-23.4876505")
     }, [])
 
-    if(location == false) {
-        return(
-            <Fragment>
-                Você precisa habilitar a localização do browser!
-            </Fragment>
-        )
-    } else {
         return (
             <Fragment>
-                <h3>Clima nas suas coordenadas</h3>
+                <h3>Clima atual:</h3>
                 <hr/>
                 <ul>
                     <li>Temperatura atual:</li>
@@ -46,5 +35,4 @@ export const  Home = () => {
                 </ul>
             </Fragment>
         )
-    }
 }

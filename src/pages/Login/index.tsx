@@ -45,7 +45,7 @@ export const Login = () => {
                     onChange={handleInputChange}
                     placeholder="Digite sua senha" 
                 />
-                <button type="submit">Entrar</button>
+                <button type="submit" onClick={logar}>Entrar</button>
             </form>
             <p>Não tem conta? <Link to="/cadastrar">Cadastre-se</Link></p>
         </div>

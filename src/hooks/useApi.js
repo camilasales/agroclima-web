@@ -12,6 +12,13 @@ export const useApi = () => ({
     },
     singin: async (email, senha) => {
         const response = await api.post('/auth/login', {email, senha});
+
+        if(response.status == 200) {
+            localStorage.setItem("TOKEN", response.data.token)
+        }
+
+        console.log(localStorage.getItem("TOKEN"))
+
         return response.data;
     },
     logout: async () => {
